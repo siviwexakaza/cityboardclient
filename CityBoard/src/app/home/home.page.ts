@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import {ChatService} from '../services/chat.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,23 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  posts: Object;
+  city='';
+
+  constructor(private chatService:ChatService) {}
+
+  ngOnInit(){
+    this.chatService.getPosts().subscribe(data =>{
+      this.posts = data;
+      
+    });
+  }
+
+  searchByCity(){
+    this.chatService.getCityPosts(this.city).subscribe(data=>{
+      this.posts=data;
+    });
+
+  }
 
 }

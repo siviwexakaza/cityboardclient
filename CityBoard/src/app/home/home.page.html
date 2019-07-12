@@ -1,14 +1,23 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-title>
-      Ionic Blank
+      <ion-icon name="chatboxes"></ion-icon> City Board
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<br>
+
+<ion-searchbar [(ngModel)]="city" (ionChange)="searchByCity($event)"></ion-searchbar>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <div class="">
+    
+      <ion-item *ngFor="let post of posts">
+        <ion-label>{{post.content}}</ion-label>
+        
+        <h5></h5>
+          
+      </ion-item>
+    
   </div>
 </ion-content>
