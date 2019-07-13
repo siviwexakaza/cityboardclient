@@ -8,17 +8,31 @@ import { Observable } from 'rxjs';
 export class ChatService {
 
   constructor(private http : HttpClient) { }
-  url = 'http://polar-retreat-28833.herokuapp.com/api/chats/';
+  //url = 'http://polar-retreat-28833.herokuapp.com/api/chats/';
+
+  url='http://polar-retreat-28833.herokuapp.com/';
+  currentProvince='';
+  currentCity='';
+
+  getCities(){
+    return this.http.get(this.url+`api/cities/${this.currentProvince}`);
+  }
+
+  getProvinces(){
+    return this.http.get(this.url+'api/provinces');
+  }
+
+
 
   getPosts() : Observable<any>{
-    return this.http.get(this.url);
+    return this.http.get(this.url+'api/chats');
   }
 
-  getCityPosts(city : String) {
-    return this.http.get(this.url+`/${city}`);
+  getCityPosts() {
+    return this.http.get(this.url+`api/chats/${this.currentCity}`);
   }
 
-  postMessage(city : String, content: String) {
-    return this.http.post(this.url,{city:city,content:content});
+  postMessage(content: String) {
+    return this.http.post(this.url+'api/chats',{city:this.currentCity,content:content});
   }
 }

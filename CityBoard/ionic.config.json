@@ -1,5 +1,7 @@
 {
   "name": "CityBoard",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
