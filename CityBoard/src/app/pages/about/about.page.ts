@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ChatService} from '../../services/chat.service';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-about',
@@ -12,11 +13,27 @@ export class AboutPage implements OnInit {
   city='';
   content='';
   result:Object;
+  username='';
+  @ViewChild('contents') contents: any;
 
   constructor(private chat:ChatService) { }
 
+
+
+  ionViewDidEnter(){
+    console.log('trigger');
+    //document.querySelector('ion-content').scrollToBottom(500);
+    this.contents.scrollToBottom(50);
+
+  }
+
   ngOnInit() {
     this.getChats();
+    this.username=this.chat.currentUsername;
+    console.log(this.username);
+    
+    
+    
   }
 
   getChats(){
@@ -33,6 +50,7 @@ export class AboutPage implements OnInit {
 
       this.result=data;
       this.content='';
+      
       this.getChats();
 
     });

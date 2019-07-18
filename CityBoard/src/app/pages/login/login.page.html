@@ -1,0 +1,28 @@
+
+
+<ion-content padding>
+
+  <ion-segment>
+    <ion-segment-button checked >
+      <ion-label>Login</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="register()">
+        <ion-label>Register</ion-label>
+      </ion-segment-button>
+  </ion-segment>
+
+  <h6 style="margin-top: 30px;text-align: center">{{feedback}}</h6>
+
+  <ion-item style="margin-top: 100px">
+      <ion-label position="stacked">Username</ion-label>
+      <ion-input [(ngModel)]="username" placeholder="Enter your username..."></ion-input>
+
+  </ion-item>
+  <ion-item style="margin-top: 30px">
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password" placeholder="Enter your password..."></ion-input>
+
+  </ion-item>
+  <ion-button style="margin-top: 30px" expand="block" (click)="login()" [disabled]="password===''">Login</ion-button>
+
+</ion-content>

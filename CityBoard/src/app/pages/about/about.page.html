@@ -1,57 +1,77 @@
 
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title style="font-weight: 100">
-       {{city}}
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-<br>
 
-<ion-content padding >
-  <div id="chatMessages">
-
-    <div class="message" *ngFor="let chat of chats">
-      <div class="innerMessage">
-          <div class="day">{{chat.day}}</div>
-          <div class="content">{{chat.content}}</div>
-
-      </div>
-      
-
-    </div>
-
-  </div>
-
-</ion-content>
-
-
-<ion-footer>
-    <ion-toolbar>
-
-        <ion-grid fixed>
-
-            <ion-row>
-          
-          
-          
-              <ion-col size="9">
-                  <ion-input  style="padding-left:5px" type="text" placeholder="type a message..." [(ngModel)]="content"></ion-input>
-          
-              </ion-col>
-              <ion-col size="3">
-                  <ion-button icon-only (click)="sendMessage()">
-      
-                      <ion-icon name="send"></ion-icon>
-                
-                  </ion-button>
-          
-                </ion-col>
-          
-            </ion-row>
-          
-          </ion-grid>
-
-
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start" Type="ios">
+        <ion-back-button ></ion-back-button>
+      </ion-buttons>
+      <ion-title style="font-weight: 100">
+         {{city}}
+      </ion-title>
     </ion-toolbar>
-  </ion-footer>
+  </ion-header>
+ 
+  
+  
+  <ion-content padding class="chatscreen" #contents>
+    <div id="chatMessages">
+
+        <ion-grid>
+            <ion-row *ngFor="let chat of chats">
+    
+              <ion-col size="9" *ngIf="username !==chat.username" class="message recieved">
+                <b>{{chat.username}}</b><br>
+                <span>{{chat.content}}</span>
+                <div class="time" text-right><br>
+                    {{chat.day | date :  "short"}}
+                </div>
+    
+              </ion-col>
+
+              <ion-col offset="3" size="9" *ngIf="username ===chat.username" class="message sent">
+                  <b>{{chat.username}}</b><br>
+                  <span>{{chat.content}}</span>
+                  <div class="time" text-right><br>
+                      {{chat.day | date :  "short"}}
+                  </div>
+      
+                </ion-col>
+    
+            </ion-row>
+          </ion-grid>
+  
+      
+  
+    </div>
+  
+  </ion-content>
+
+
+
+
+
+
+    <ion-footer>
+        <ion-toolbar color="light">
+          <ion-row align-items-center no-padding>
+            <ion-col size="10">
+              <textarea autosize maxRows="3" [(ngModel)]="content" class="msgIn" placeholder="Write a message..."></textarea>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button expand="block" fill="clear" color="primary" [disabled]="content===''" class="btnSend" (click)="sendMessage()">
+                <ion-icon name="ios-send" slot="icon-only"></ion-icon>
+              </ion-button>
+    
+            </ion-col>
+    
+          </ion-row>
+    
+        </ion-toolbar>
+    
+    
+      </ion-footer>
+
+
+
+
+

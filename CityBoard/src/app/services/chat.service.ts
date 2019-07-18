@@ -13,6 +13,7 @@ export class ChatService {
   url='http://polar-retreat-28833.herokuapp.com/';
   currentProvince='';
   currentCity='';
+  currentUsername='';
 
   getCities(){
     return this.http.get(this.url+`api/cities/${this.currentProvince}`);
@@ -33,6 +34,6 @@ export class ChatService {
   }
 
   postMessage(content: String) {
-    return this.http.post(this.url+'api/chats',{city:this.currentCity,content:content});
+    return this.http.post(this.url+'api/chats',{city:this.currentCity,content:content,username:this.currentUsername});
   }
 }
